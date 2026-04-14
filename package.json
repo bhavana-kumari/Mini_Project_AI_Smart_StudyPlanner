@@ -1,0 +1,21 @@
+{
+  "name": "ai-smart-study-planner",
+  "version": "1.0.0",
+  "description": "AI Powered Smart Study Planner - full-stack Express + MongoDB + vanilla JS client",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "keywords": ["study", "planner", "mongodb", "express"],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "google-auth-library": "^9.14.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0"
+  }
+}

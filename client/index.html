@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Powered Smart Study Planner</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Chart.js for Progress page -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+    <!-- Google Identity Services (Sign-In) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <main id="view-login" class="view view-auth">
+      <div class="auth-card card-elevated">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">📚</span>
+          <div>
+            <h1>Smart Study Planner</h1>
+            <p class="muted">AI-assisted focus &amp; scheduling</p>
+          </div>
+        </div>
+        <form id="login-form" class="stack">
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="you@school.edu" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" name="password" required autocomplete="current-password" />
+          </label>
+          <p id="login-error" class="form-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        </form>
+        <div class="divider"><span>or</span></div>
+        <div id="google-btn-login" class="google-btn-wrap"></div>
+        <p class="muted small center">
+          New here?
+          <button type="button" class="link-btn" id="go-signup">Create an account</button>
+        </p>
+      </div>
+    </main>
+
+    <!-- SIGNUP -->
+    <main id="view-signup" class="view view-auth hidden">
+      <div class="auth-card card-elevated">
+        <div class="brand">
+          <span class="brand-icon" aria-hidden="true">✨</span>
+          <div>
+            <h1>Join the planner</h1>
+            <p class="muted">Name, email &amp; a secure password</p>
+          </div>
+        </div>
+        <form id="signup-form" class="stack">
+          <label class="field">
+            <span>Name</span>
+            <input type="text" name="name" required autocomplete="name" placeholder="Alex" />
+          </label>
+          <label class="field">
+            <span>Email</span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span>Password</span>
+            <input type="password" name="password" required minlength="6" autocomplete="new-password" />
+          </label>
+          <p id="signup-error" class="form-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+        </form>
+        <div class="divider"><span>or</span></div>
+        <div id="google-btn-signup" class="google-btn-wrap"></div>
+        <p class="muted small center">
+          Already have an account?
+          <button type="button" class="link-btn" id="go-login">Back to login</button>
+        </p>
+      </div>
+    </main>
+
+    <!-- DASHBOARD -->
+    <div id="view-dashboard" class="view dashboard-wrap hidden">
+      <header class="dash-header card-elevated">
+        <div class="dash-title">
+          <span class="brand-icon sm" aria-hidden="true">🎓</span>
+          <div>
+            <h1>Dashboard</h1>
+            <p class="muted" id="welcome-msg">Welcome back!</p>
+            <p class="dash-date-line" id="dash-date-line" aria-live="polite"></p>
+          </div>
+        </div>
+        <button type="button" class="btn btn-ghost" id="btn-logout">Log out</button>
+      </header>
+
+      <nav class="tab-nav card-elevated" aria-label="Main sections">
+        <button type="button" class="tab active" data-tab="timetable" aria-selected="true">📅 Timetable</button>
+        <button type="button" class="tab" data-tab="planner">🤖 AI Planner</button>
+        <button type="button" class="tab" data-tab="progress">📈 Progress</button>
+        <button type="button" class="tab" data-tab="watch">⏱ Study Watch</button>
+      </nav>
+
+      <!-- Timetable -->
+      <section id="panel-timetable" class="panel">
+        <div class="panel-head">
+          <h2>Timetable</h2>
+          <p class="muted">Add subjects for a chosen day, track tasks, and mark them done.</p>
+        </div>
+        <div class="grid-2">
+          <form id="timetable-form" class="card-elevated form-card">
+            <h3>Add subject</h3>
+            <label class="field">
+              <span>Date</span>
+              <input type="date" name="date" id="timetable-date" required />
+            </label>
+            <label class="field">
+              <span>Subject name</span>
+              <input type="text" name="name" required placeholder="Calculus" />
+            </label>
+            <div class="row">
+              <label class="field">
+                <span>Difficulty</span>
+                <select name="difficulty">
+                  <option value="easy">Easy</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="hard">Hard</option>
+                </select>
+              </label>
+            </div>
+            <div class="row">
+              <label class="field">
+                <span>Start</span>
+                <input type="time" name="start" required />
+              </label>
+              <label class="field">
+                <span>End</span>
+                <input type="time" name="end" required />
+              </label>
+            </div>
+            <label class="field">
+              <span>Task</span>
+              <input type="text" name="task" placeholder="Read chapter 3" />
+            </label>
+            <button type="submit" class="btn btn-primary btn-block">Save entry</button>
+            <p id="timetable-form-msg" class="form-msg" role="status"></p>
+          </form>
+          <div id="timetable-list" class="timetable-list" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- AI Planner -->
+      <section id="panel-planner" class="panel hidden">
+        <div class="panel-head">
+          <h2>AI Planner</h2>
+          <p class="muted">Build a focused day from your timetable, or a balanced AI week (Mon–Sun).</p>
+        </div>
+        <div class="planner-actions planner-actions-row">
+          <button type="button" class="btn btn-primary" id="btn-plan-today">Generate Today Plan</button>
+          <button type="button" class="btn btn-secondary" id="btn-plan-weekly">Generate Weekly Plan (AI)</button>
+          <p id="planner-msg" class="form-msg planner-msg-inline"></p>
+        </div>
+        <div id="planner-output" class="planner-output-wrap"></div>
+      </section>
+
+      <!-- Progress -->
+      <section id="panel-progress" class="panel hidden">
+        <div class="panel-head">
+          <h2>Progress</h2>
+          <p class="muted">
+            Day-wise tracking — <span id="progress-day-label">Today</span>
+            <span class="muted" id="progress-date-label"></span>
+          </p>
+        </div>
+        <div class="stats-row stats-row-today">
+          <div class="stat-card card-elevated stat-today">
+            <span class="stat-emoji">📖</span>
+            <div>
+              <p class="stat-label">Today’s study</p>
+              <p class="stat-value" id="stat-today-study">0</p>
+              <p class="muted small">minutes</p>
+            </div>
+          </div>
+          <div class="stat-card card-elevated stat-today">
+            <span class="stat-emoji">☕</span>
+            <div>
+              <p class="stat-label">Today’s breaks</p>
+              <p class="stat-value" id="stat-today-break">0</p>
+              <p class="muted small">minutes</p>
+            </div>
+          </div>
+          <div class="stat-card card-elevated stat-today">
+            <span class="stat-emoji">✅</span>
+            <div>
+              <p class="stat-label">Tasks done today</p>
+              <p class="stat-value" id="stat-today-tasks">0</p>
+              <p class="muted small">from timetable</p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card card-elevated">
+          <h3>This week — study minutes (Mon → Sun)</h3>
+          <canvas id="weekly-chart" height="140" aria-label="Weekly study chart"></canvas>
+        </div>
+      </section>
+
+      <!-- Study Watch / Pomodoro -->
+      <section id="panel-watch" class="panel hidden">
+        <div class="panel-head">
+          <h2>Study Watch</h2>
+          <p class="muted">25 min focus · 5 min break — times sync to your progress.</p>
+        </div>
+        <div class="pomodoro-layout">
+          <div class="pomodoro card-elevated">
+            <p class="phase-label" id="pomodoro-phase">Ready</p>
+            <p class="timer-display" id="pomodoro-time">25:00</p>
+            <div class="timer-actions">
+              <button type="button" class="btn btn-primary" id="pom-start">Start</button>
+              <button type="button" class="btn btn-secondary" id="pom-pause" disabled>Pause</button>
+              <button type="button" class="btn btn-ghost" id="pom-reset">Reset</button>
+            </div>
+            <p class="muted small" id="pomodoro-hint">Press Start to begin a 25-minute study session.</p>
+          </div>
+          <div class="card-elevated pomodoro-side">
+            <h3>Session totals (today)</h3>
+            <p><strong>Study:</strong> <span id="today-study">0</span> min</p>
+            <p><strong>Break:</strong> <span id="today-break">0</span> min</p>
+          <!--  <p class="muted small">Each phase is saved to the server with <strong>today’s date</strong> (your local calendar).</p>-->
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="js/login.js"></script>
+    <script src="js/signup.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/timetable.js"></script>
+    <script src="js/planner.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/watch.js"></script>
+  </body>
+</html>

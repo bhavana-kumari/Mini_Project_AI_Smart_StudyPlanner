@@ -1,0 +1,652 @@
+/* --- Global reset & tokens --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Clean student-built palette */
+  --primary: #4f46e5; /* indigo */
+  --secondary: #22c55e; /* green */
+  --bg: #f1f5f9; /* slightly cooler light background */
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --text: #111827;
+  --muted: #6b7280;
+  --success: #22c55e;
+  --danger: #dc2626;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --font: Arial, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.view {
+  min-height: 100vh;
+  padding: 1.25rem 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --- Auth cards --- */
+.auth-card {
+  width: min(440px, 100%);
+  padding: 1.25rem;
+}
+
+.brand {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.brand-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+.brand-icon.sm {
+  font-size: 1.75rem;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+}
+.small {
+  font-size: 0.85rem;
+}
+.center {
+  text-align: center;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  font: inherit;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--primary);
+}
+
+.btn {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.55rem 0.9rem;
+  background: #ffffff;
+}
+
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background: #4338ca;
+  border-color: #4338ca;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: var(--text);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: transparent;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.google-btn-wrap {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.form-error {
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.form-msg {
+  min-height: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0.5rem 0 0;
+}
+
+/* Elevated glass cards */
+.card-elevated {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* --- Dashboard --- */
+.dashboard-wrap {
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 1050px;
+  margin: 0 auto;
+  gap: 1.25rem;
+}
+
+.dash-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+}
+
+/* Make header feel like a simple navbar */
+.dash-header,
+.tab-nav {
+  box-shadow: none;
+}
+
+.dash-header {
+  border-left: 4px solid var(--primary);
+}
+
+.dash-title {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.dash-title h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.dash-date-line {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0.6rem;
+}
+
+.tab {
+  flex: 1 1 auto;
+  min-width: 120px;
+  padding: 0.5rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.tab:hover {
+  background: #f9fafb;
+}
+
+.tab.active {
+  border-color: var(--primary);
+  background: #eef2ff;
+}
+
+.panel {
+  padding: 0.25rem 0.25rem 0.75rem;
+}
+
+.panel-head h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-card {
+  padding: 1rem;
+  align-self: start;
+}
+
+.form-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* Timetable list */
+.timetable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.tt-card {
+  padding: 0.85rem 0.95rem;
+  border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.tt-card.done {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+
+.tt-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.badge.hard {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.badge.medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+.badge.easy {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.tt-actions {
+  display: flex;
+  flex-direction: row;
+  gap: 0.45rem;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.tt-strike {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  opacity: 0.9;
+}
+
+.tt-done-tick {
+  color: var(--success);
+  margin-right: 0.35rem;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.icon-btn {
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.icon-btn:hover {
+  background: #f3f4f6;
+}
+
+.icon-btn.danger {
+  color: var(--danger);
+}
+
+.tt-row {
+  grid-column: 1 / -1;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* Planner */
+.planner-actions {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.planner-actions-row {
+  align-items: center;
+}
+
+.planner-msg-inline {
+  flex: 1 1 220px;
+  margin: 0 !important;
+}
+
+.planner-output-wrap {
+  margin-top: 0.5rem;
+}
+
+.planner-empty {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.planner-today {
+  padding: 1.25rem 1.35rem;
+}
+
+.planner-today h3 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.planner-slot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.planner-slot-row {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.65rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+}
+
+.planner-slot-row .planner-time {
+  font-weight: 700;
+  color: var(--primary);
+  margin-right: 0.65rem;
+}
+
+.planner-slot-row .planner-subj {
+  font-weight: 600;
+}
+
+.planner-week-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.planner-day-box {
+  min-height: 170px;
+  padding: 1.05rem 1.15rem;
+}
+
+.planner-day-box h4 {
+  margin: 0 0 0.65rem;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+
+/* Keep these classes but make them plain (no gradients) */
+.planner-day-box.grad-0,
+.planner-day-box.grad-1,
+.planner-day-box.grad-2,
+.planner-day-box.grad-3 {
+  background: #ffffff;
+}
+
+.planner-block-time {
+  margin: 0;
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 0.92rem;
+}
+
+.planner-block-subj {
+  margin: 0.25rem 0 0.35rem;
+  font-weight: 600;
+}
+
+.planner-note {
+  margin: 0.35rem 0 0;
+}
+
+.planner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.planner-card {
+  padding: 1.15rem;
+  border-radius: var(--radius);
+  background: linear-gradient(160deg, rgba(124, 58, 237, 0.25), rgba(6, 182, 212, 0.12));
+  border: 1px solid var(--card-border);
+  min-height: 120px;
+  transition: transform 0.2s;
+}
+
+.planner-card:hover {
+  transform: translateY(-3px);
+}
+
+.planner-card h4 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.planner-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+/* Progress */
+.stats-row-today {
+  margin-bottom: 1.35rem;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+}
+
+.stat-emoji {
+  font-size: 2rem;
+}
+
+.stat-label {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.stat-value {
+  margin: 0.15rem 0 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.chart-card {
+  padding: 1rem;
+}
+
+.chart-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+/* Pomodoro */
+.pomodoro-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .pomodoro-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pomodoro {
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.phase-label {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.timer-display {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.timer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.pomodoro-side {
+  padding: 1.35rem;
+}
+
+.pomodoro-side h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+}
+
+.pomodoro-side p {
+  margin: 0.4rem 0;
+}
