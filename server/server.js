@@ -29,7 +29,7 @@ app.use("/api/ai-schedule", aiScheduleRoutes);
 
 //app.use("/api/planner", plannerRoutes);
 
-// Single-page client (HTML/CSS/vanilla JS)
+// Single-page client 
 const clientDir = path.join(__dirname, "..", "client");
 app.use(express.static(clientDir));
 
