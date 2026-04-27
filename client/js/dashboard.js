@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       const res = await fetch(window.apiBase + "/auth/me", { headers: window.authHeaders(false) });
       if (res.ok) {
-        const data = await res.json();
+        const data = await window.readJson(res);
         window.enterDashboard(data.user);
       } else {
         localStorage.removeItem("token");
