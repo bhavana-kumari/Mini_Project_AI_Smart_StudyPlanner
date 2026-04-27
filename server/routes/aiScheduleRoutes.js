@@ -1,11 +1,10 @@
 const express = require("express");
-const plannerController = require("../controllers/plannerController");
 const authMiddleware = require("../middleware/authMiddleware");
+const aiScheduleController = require("../controllers/aiScheduleController");
 
 const router = express.Router();
 
 router.use(authMiddleware);
-router.get("/today", plannerController.generateToday);
-router.get("/weekly", plannerController.generateWeekly);
+router.post("/", aiScheduleController.generateSchedule);
 
 module.exports = router;
