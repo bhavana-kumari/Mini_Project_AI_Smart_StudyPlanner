@@ -24,6 +24,28 @@ window.authHeaders = function authHeaders(includeJson = true) {
 };
 
 /**
+ * Read JSON responses safely.
+ * Prevents "Unexpected token '<'" when the server returns HTML (SPA fallback / error page).
+ */
+window.readJson = async function readJson(res) {
+  const ct = (res.headers && res.headers.get && res.headers.get("content-type")) || "";
+  const text = await res.text();
+  const looksJson = ct.includes("application/json") || text.trim().startsWith("{") || text.trim().startsWith("[");
+
+  if (!looksJson) {
+    console.log("Non-JSON response received:", text.slice(0, 600));
+    throw new Error("Unexpected server response (not JSON). Check API URL / server logs.");
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    console.log("Invalid JSON received:", text.slice(0, 600));
+    throw new Error("Invalid JSON returned by server.");
+  }
+};
+
+/**
  * Google sends the ID token here after user signs in with Google.
  */
 window.handleGoogleCredential = async function handleGoogleCredential(response) {
@@ -35,7 +57,7 @@ window.handleGoogleCredential = async function handleGoogleCredential(response) 
       headers: window.authHeaders(true),
       body: JSON.stringify({ credential: response.credential }),
     });
-    const data = await res.json();
+    const data = await window.readJson(res);
     if (!res.ok) throw new Error(data.message || "Google sign-in failed");
     localStorage.setItem("token", data.token);
     if (typeof window.enterDashboard === "function") window.enterDashboard(data.user);
@@ -108,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: window.authHeaders(true),
           body: JSON.stringify(body),
         });
-        const data = await res.json();
+        const data = await window.readJson(res);
         if (!res.ok) throw new Error(data.message || "Login failed");
         localStorage.setItem("token", data.token);
         if (typeof window.enterDashboard === "function") window.enterDashboard(data.user);
