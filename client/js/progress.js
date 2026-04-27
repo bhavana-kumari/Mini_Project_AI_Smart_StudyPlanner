@@ -19,7 +19,7 @@ window.loadProgressData = async function loadProgressData() {
       window.apiBase + "/time/progress-summary?date=" + encodeURIComponent(date),
       { headers: window.authHeaders(false) }
     );
-    const data = await res.json();
+    const data = await window.readJson(res);
     if (!res.ok) throw new Error(data.message || "Failed to load progress");
 
     if (dayLabel) dayLabel.textContent = data.currentDayName || "Today";
