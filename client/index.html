@@ -15,7 +15,7 @@
     <main id="view-login" class="view view-auth">
       <div class="auth-card card-elevated">
         <div class="brand">
-          <span class="brand-icon" aria-hidden="true">📚</span>
+          <span class="brand-icon" aria-hidden="true">SS</span>
           <div>
             <h1>Smart Study Planner</h1>
             <p class="muted">AI-assisted focus &amp; scheduling</p>
@@ -46,7 +46,7 @@
     <main id="view-signup" class="view view-auth hidden">
       <div class="auth-card card-elevated">
         <div class="brand">
-          <span class="brand-icon" aria-hidden="true">✨</span>
+          <span class="brand-icon" aria-hidden="true">SP</span>
           <div>
             <h1>Join the planner</h1>
             <p class="muted">Name, email &amp; a secure password</p>
@@ -81,7 +81,7 @@
     <div id="view-dashboard" class="view dashboard-wrap hidden">
       <header class="dash-header card-elevated">
         <div class="dash-title">
-          <span class="brand-icon sm" aria-hidden="true">🎓</span>
+          <span class="brand-icon sm" aria-hidden="true">SS</span>
           <div>
             <h1>Dashboard</h1>
             <p class="muted" id="welcome-msg">Welcome back!</p>
@@ -92,10 +92,10 @@
       </header>
 
       <nav class="tab-nav card-elevated" aria-label="Main sections">
-        <button type="button" class="tab active" data-tab="timetable" aria-selected="true">📅 Timetable</button>
-        <button type="button" class="tab" data-tab="planner">🤖 AI Planner</button>
-        <button type="button" class="tab" data-tab="progress">📈 Progress</button>
-        <button type="button" class="tab" data-tab="watch">⏱ Study Watch</button>
+        <button type="button" class="tab active" data-tab="timetable" aria-selected="true">Timetable</button>
+        <button type="button" class="tab" data-tab="planner">AI Planner</button>
+        <button type="button" class="tab" data-tab="progress">Progress</button>
+        <button type="button" class="tab" data-tab="watch">Study Watch</button>
       </nav>
 
       <!-- Timetable -->
@@ -150,11 +150,10 @@
       <section id="panel-planner" class="panel hidden">
         <div class="panel-head">
           <h2>AI Planner</h2>
-          <p class="muted">Build a focused day from your timetable, or a balanced AI week (Mon–Sun).</p>
+          <p class="muted">Generate a smart AI-assisted schedule from your saved tasks and topics.</p>
         </div>
         <div class="planner-actions planner-actions-row">
-          <button type="button" class="btn btn-primary" id="btn-plan-today">Generate Today Plan</button>
-          <button type="button" class="btn btn-secondary" id="btn-plan-weekly">Generate Weekly Plan (AI)</button>
+          <button type="button" class="btn btn-primary" id="btn-generate-smart-schedule">Generate Smart Schedule</button>
           <p id="planner-msg" class="form-msg planner-msg-inline"></p>
         </div>
         <div id="planner-output" class="planner-output-wrap"></div>
@@ -171,7 +170,7 @@
         </div>
         <div class="stats-row stats-row-today">
           <div class="stat-card card-elevated stat-today">
-            <span class="stat-emoji">📖</span>
+            <span class="stat-icon stat-icon-study" aria-hidden="true"></span>
             <div>
               <p class="stat-label">Today’s study</p>
               <p class="stat-value" id="stat-today-study">0</p>
@@ -179,7 +178,7 @@
             </div>
           </div>
           <div class="stat-card card-elevated stat-today">
-            <span class="stat-emoji">☕</span>
+            <span class="stat-icon stat-icon-break" aria-hidden="true"></span>
             <div>
               <p class="stat-label">Today’s breaks</p>
               <p class="stat-value" id="stat-today-break">0</p>
@@ -187,7 +186,7 @@
             </div>
           </div>
           <div class="stat-card card-elevated stat-today">
-            <span class="stat-emoji">✅</span>
+            <span class="stat-icon stat-icon-done" aria-hidden="true"></span>
             <div>
               <p class="stat-label">Tasks done today</p>
               <p class="stat-value" id="stat-today-tasks">0</p>
