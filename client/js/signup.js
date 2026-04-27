@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: window.authHeaders(true),
           body: JSON.stringify(body),
         });
-        const data = await res.json();
+        const data = await window.readJson(res);
         if (!res.ok) throw new Error(data.message || "Signup failed");
         localStorage.setItem("token", data.token);
         if (typeof window.enterDashboard === "function") window.enterDashboard(data.user);
