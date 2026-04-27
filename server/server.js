@@ -7,7 +7,9 @@ const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const timetableRoutes = require("./routes/timetableRoutes");
 const timeRoutes = require("./routes/timeRoutes");
-const plannerRoutes = require("./routes/plannerRoutes");
+const aiScheduleRoutes = require("./routes/aiScheduleRoutes");
+
+//const plannerRoutes = require("./routes/plannerRoutes");
 
 if (!process.env.JWT_SECRET) {
   console.warn("Warning: JWT_SECRET is not set. Set it in .env for production.");
@@ -23,7 +25,9 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/timetable", timetableRoutes);
 app.use("/api/time", timeRoutes);
-app.use("/api/planner", plannerRoutes);
+app.use("/api/ai-schedule", aiScheduleRoutes);
+
+//app.use("/api/planner", plannerRoutes);
 
 // Single-page client (HTML/CSS/vanilla JS)
 const clientDir = path.join(__dirname, "..", "client");
