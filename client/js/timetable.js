@@ -38,7 +38,7 @@ function cardHtml(item) {
     "</span></div>" +
     '<p class="tt-row' +
     strike +
-    '">🕒 ' +
+    '"><span class="tt-meta-label">Time</span> ' +
     escapeHtml(item.start) +
     " – " +
     escapeHtml(item.end) +
@@ -46,15 +46,15 @@ function cardHtml(item) {
     "</p>" +
     '<p class="tt-row tt-task' +
     strike +
-    '">📝 ' +
+    '"><span class="tt-meta-label">Task</span> ' +
     escapeHtml(item.task || "—") +
     "</p>" +
     "</div>" +
     '<div class="tt-actions">' +
     '<button type="button" class="icon-btn" title="Mark done" data-action="toggle" aria-label="Mark complete">' +
-    (done ? "✔" : "⬜") +
+    (done ? "✓" : "○") +
     "</button>" +
-    '<button type="button" class="icon-btn danger" title="Delete" data-action="delete" aria-label="Delete">🗑️</button>' +
+    '<button type="button" class="icon-btn danger" title="Delete" data-action="delete" aria-label="Delete">×</button>' +
     "</div>" +
     "</article>"
   );
@@ -81,7 +81,7 @@ window.refreshTimetable = async function refreshTimetable() {
   const url = TIMETABLE_API + "?date=" + encodeURIComponent(date);
   try {
     const res = await fetch(url, { headers: window.authHeaders(false) });
-    const data = await res.json();
+    const data = await window.readJson(res);
     if (!res.ok) throw new Error(data.message || "Failed to load");
     if (!data.length) {
       list.innerHTML =
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
           headers: window.authHeaders(true),
           body: JSON.stringify(body),
         });
-        const data = await res.json();
+        const data = await window.readJson(res);
         if (!res.ok) throw new Error(data.message || "Save failed");
         msg.textContent = "Saved!";
         window.refreshTimetable();
@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: window.authHeaders(true),
             body: "{}",
           });
-          const data = await res.json();
+          const data = await window.readJson(res);
           if (!res.ok) throw new Error(data.message || "Update failed");
           window.refreshTimetable();
         } catch (ex) {
@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
             method: "DELETE",
             headers: window.authHeaders(false),
           });
-          const data = await res.json();
+          const data = await window.readJson(res);
           if (!res.ok) throw new Error(data.message || "Delete failed");
           window.refreshTimetable();
         } catch (ex) {
