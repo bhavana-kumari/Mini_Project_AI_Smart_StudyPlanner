@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const body = {
         name: fd.get("name"),
         email: fd.get("email"),
-        password: fd.get("password"),
+        password: fd.get("password"), 
       }
       try {
         const res = await fetch(window.apiBase + "/auth/signup", {
