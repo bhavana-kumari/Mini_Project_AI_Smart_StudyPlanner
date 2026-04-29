@@ -16,7 +16,7 @@ window.showSignupView = function showSignupView() {
   setView("view-signup");
 };
 
-/** Long form e.g. Monday, 15 April 2026 */
+/* Long form e.g. Monday, 15 April 2026 */
 function formatDashboardDate(d) {
   const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const months = [
