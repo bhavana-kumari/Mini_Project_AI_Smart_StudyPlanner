@@ -1,6 +1,6 @@
 # AI Powered Smart Study Planner
 
-Full-stack study planner with **vanilla HTML/CSS/JavaScript** on the frontend and **Node.js + Express + MongoDB (Mongoose)** on the backend. Includes JWT auth (with bcrypt), optional **Google Sign-In**, timetable CRUD, a simulated **AI weekly planner**, **Chart.js** progress stats, and a **Pomodoro** timer that logs minutes to the server.
+Full-stack study planner with **vanilla HTML/CSS/JavaScript** on the frontend and **Node.js + Express + MongoDB (Mongoose)** on the backend. Includes JWT auth (with bcrypt), optional **Google Sign-In**, timetable CRUD, a simulated **AI weekly planner**, **Chart.js** progress stats, and a **Pomodoro** timer that logs minutes to the server .
 
 ## Prerequisites
 
